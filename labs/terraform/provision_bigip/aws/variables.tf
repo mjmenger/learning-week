@@ -9,7 +9,11 @@ variable "prefix" {
   type        = string
   default     = "tf-aws-bigip"
 }
-variable region {}
+variable region {
+  description = "AWS region to deploy in"
+  type        = string
+  default     = "us-west-2"
+}
 
 variable cidr {
   description = "aws VPC CIDR"
@@ -24,7 +28,11 @@ variable availabilityZones {
   default     = ["us-west-2a", "us-west-2b"]
 }
 
-variable AllowedIPs {}
+variable AllowedIPs {
+  description = "IP CIDR to allow traffic from"
+  type        = list[string]
+  default     = ["0.0.0.0/0"]
+}
 
 variable instance_count {
   description = "Number of Bigip instances to create( From terraform 0.13, module supports count feature to spin mutliple instances )"
