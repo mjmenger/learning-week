@@ -30,7 +30,7 @@ variable availabilityZones {
 
 variable AllowedIPs {
   description = "IP CIDR to allow traffic from"
-  type        = list[string]
+  type        = list(string)
   default     = ["0.0.0.0/0"]
 }
 
