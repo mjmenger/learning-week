@@ -9,6 +9,7 @@ variable "prefix" {
   type        = string
   default     = "tf-aws-bigip"
 }
+
 variable region {
   description = "AWS region to deploy in"
   type        = string
@@ -20,7 +21,6 @@ variable cidr {
   type        = string
   default     = "10.0.0.0/16"
 }
-
 
 variable availabilityZones {
   description = "If you want the VM placed in an AWS Availability Zone, and the AWS region you are deploying to supports it, specify the numbers of the existing Availability Zone you want to use."

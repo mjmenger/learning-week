@@ -176,7 +176,7 @@ resource "aws_key_pair" "generated_key" {
 # Create BIG-IP
 #
 module bigip {
-  source                      = "../../"
+  source                      = "github.com/f5devcentral/terraform-aws-bigip-module.git"
   count                       = var.instance_count
   prefix                      = format("%s-3nic", var.prefix)
   ec2_key_name                = aws_key_pair.generated_key.key_name
