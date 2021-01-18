@@ -8,3 +8,5 @@ This lab leverages the BIG-IP Terraform provisioners to deploy a BIG-IP in AWS a
 ## Sections
 1. [Setup](setup.md)
 2. [Deploy BIG-IP in AWS](deploy_aws.md)
+3. [Configure the BIG-IP](#)
+
