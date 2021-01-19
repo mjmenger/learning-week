@@ -13,7 +13,7 @@ For this lab we will leverage the [DevOps Base blueprint](https://udf.f5.com/b/5
 
 If you are taking this lab as part of a course, please access the lab via the course information provided to you.  
 
-Otherwise, please deploy a new instance of the [DevOps Base blueprint](https://udf.f5.com/b/54b4e41b-ba46-48a1-8274-51a970e7e66b#documentation). 
+Otherwise, please deploy and start a new instance of the [DevOps Base blueprint](https://udf.f5.com/b/54b4e41b-ba46-48a1-8274-51a970e7e66b#documentation). 
 
 ### Cloud Account
 Once you've deployed the DevOps base blueprint you should now see a Cloud Accounts tab with information on your AWS ephermeral environment: 
@@ -26,7 +26,7 @@ Once you've deployed the DevOps base blueprint you should now see a Cloud Accoun
 - **Console Password**: Passsword for the AWS console
 
 ## Open VS Code
-This lab will leverage a web based instance of VS Code deployed with the DevOps Base blueprint.  
+This lab will leverage a web-based instance of VS Code deployed with the DevOps Base blueprint.  
 
 To access VS Code:
 1. Click the Components tab in the DevOps Base deployment
@@ -37,6 +37,8 @@ Open a base terminal in VS Code:
 1. Click the hamburger menu (3 horizontal lines) in the top left
 2. Click Terminal
 3. Click New Terminal
+
+Note: when pasting the commands into the web-based VS Code you may be prompted to allow the web app access to your clipboard.
 
 ## Install AWS CLI
 Run the following commands in your VS Code terminal:
