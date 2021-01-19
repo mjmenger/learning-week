@@ -1,5 +1,5 @@
 # Provision BIG-IP virtual appliances with Terraform
-This lab leverages the [BIG-IP Terraform Provisioner for AWS](https://github.com/f5devcentral/terraform-aws-bigip-module) to deploy a BIG-IP in AWS.  At the time of this lab the GCP provisioner is under development. 
+This lab leverages the [BIG-IP Terraform Provisioner for AWS](https://github.com/f5devcentral/terraform-aws-bigip-module) to deploy a BIG-IP in AWS.  
 
 ## Requirements
  - Access to the Unified Demo Framework (UDF)
