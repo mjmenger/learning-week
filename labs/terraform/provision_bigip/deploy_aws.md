@@ -53,7 +53,7 @@ Once the *terraform apply* command completes, it will output information related
 You can now use this information to onboard and configure the BIG-IP.
 
 ## Test the deployment
-To test our deployment we will leverage the [InSpec](inspec.io) tool by [Chef](https://www.chef.io/). 
+To test our deployment we will leverage the [InSpec](inspec.io) tool by [Chef](https://www.chef.io/). Chef InSpec is an open-source framework for testing and auditing your applications and infrastructure. Chef InSpec works by comparing the actual state of your system with the desired state that you express in easy-to-read and easy-to-write Chef InSpec code. Chef InSpec detects violations and displays findings in the form of a report, but puts you in control of remediation.
 
 The tests require the following environment variables:
 | Variable | Description |
@@ -66,7 +66,7 @@ The tests require the following environment variables:
 | as3_version | the expected version of application services |
 | ts_version | the expected version of telemetry streaming |
 
-Run the following commands to set these environment variables:
+Run the following commands to set the required environment variables:
 ```bash
 export bigip_address=`terraform output -json | jq ".mgmtPublicIP.value[0][0]" -r`
 export bigip_port=`terraform output -json | jq ".mgmtPort.value[0]" -r`
@@ -76,7 +76,7 @@ export do_version=1.16.0
 export as3_version=3.23.0
 ```
 
-Now run our test:
+Now run the BIG-IP InSpec tests:
 ```bash
 inspec exec tests/big-ip --input=bigip_address=$bigip_address bigip_port=$bigip_port user=$user password=$password do_version=$do_version as3_version=$as3_version
 ```
