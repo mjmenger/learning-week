@@ -16,17 +16,19 @@ If you are taking this lab as part of a course, please access the lab via the co
 Otherwise, please deploy and start a new instance of the [DevOps Base blueprint](https://udf.f5.com/b/54b4e41b-ba46-48a1-8274-51a970e7e66b#documentation). 
 
 ### Cloud Account
-Once you've deployed the DevOps base blueprint you should now see a Cloud Accounts tab with information on your AWS ephermeral environment: 
-- **Region**: typically us-west-2
-- **Services**: AWS services available in your AWS account
-- **API Key**: AWS API Key used for programatic access
-- **API Secret**: AWS API Secret used for programmatic access
-- **Console URL**: URL to access the AWS console for your account
-- **Console Username**: Username for the AWS console
-- **Console Password**: Passsword for the AWS console
+Once you've deployed the DevOps base blueprint you should now see a Cloud Accounts tab with information on your AWS ephermeral environment. 
+| Variable | Description |
+|----------|-------------|
+| **Region** | typically us-west-2 |
+| **Services** | AWS services available in your AWS account |
+| **API Key** | AWS API Key used for programatic access |
+| **API Secret** | AWS API Secret used for programmatic access |
+| **Console URL** | URL to access the AWS console for your account |
+| **Console Username** | Username for the AWS console |
+| **Console Password** | Passsword for the AWS console |
 
 ## Open VS Code
-This lab will leverage a web-based instance of VS Code deployed with the DevOps Base blueprint.  
+This lab leverages a web based instance of [VS Code](https://code.visualstudio.com/) deployed within the DevOps Base Blueprint.  
 
 To access VS Code:
 1. Click the Components tab in the DevOps Base deployment
@@ -54,9 +56,9 @@ aws --version
 ```
 
 ## Configure AWS Credentials 
-The UDF environment has an internal metadata server which contains the AWS API Key and Secret.  We will use the commands below to save this values so the AWS CLI and Terraform can use them.
+The UDF environment has an internal metadata server which contains the AWS API Key and Secret.  We will use the commands below to save these values so the AWS CLI and Terraform can use them.
 
-Run the following commands to store the AWS API Key and Secret as environment variables:
+Run the following commands to store the AWS API Key, AWS API Secret and default region as environment variables:
 ```bash
 export AWS_ACCESS_KEY_ID=`curl http://metadata.udf/cloudAccounts | jq  '.cloudAccounts[].apiKey' -r`
 export AWS_SECRET_ACCESS_KEY=`curl http://metadata.udf/cloudAccounts | jq  '.cloudAccounts[].apiSecret' -r`
@@ -69,14 +71,18 @@ aws ec2 describe-regions
 ```
 
 ## Add EC2 Key Pair
-Run the following commands from your terminal in VS Code:
+The BIG-IP can leverage [SSH Public Key authentication](https://www.ssh.com/ssh/public-key-authentication) which is a safer mechanism for publically accessible SSH servers.   To leverage this feature, we need to store an SSH key pair in our AWS EC2 configuration. 
+
+Run the following commands from your terminal in VS Code to create and save a new SSH key pair:
 ```bash
 aws ec2 create-key-pair --key-name my-key-pair --query "KeyMaterial" --output text > udf.pem
 chmod 400 udf.pem
 ```
 
 ## Install Terraform
-The DevOps base blueprint deploys an Ubuntu guest to host VS Code and run terraform commands from. To install Terraform we will add the Hashicorp repository to our local Apt registry:
+The DevOps base blueprint deploys an Ubuntu guest to host VS Code and run terraform commands from. While the blueprint already contains a version of Terraform it is helpful for you to understand how Terraform is installed. 
+
+To install Terraform we will add the Hashicorp repository to our local Apt registry:
 ```bash
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
@@ -93,7 +99,7 @@ terraform --version
 ```
 
 ## Download lab code from GitHub
-To perform the remainder of this lab we need to clone the Terraform code from the GitHub repository:
+To perform the remainder of this lab we need to clone the Terraform code from the lab's GitHub repository:
 ```bash
 cd ~/projects
 git clone https://github.com/f5devcentral/learning-week.git
