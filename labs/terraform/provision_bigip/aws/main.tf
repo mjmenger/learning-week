@@ -14,7 +14,7 @@ resource "random_id" "id" {
 #
 # Create random password for BIG-IP
 #
-resource random_string password {
+resource "random_string" "password" {
   length      = 16
   min_upper   = 1
   min_lower   = 1
@@ -175,7 +175,7 @@ resource "aws_key_pair" "generated_key" {
 #
 # Create BIG-IP
 #
-module bigip {
+module "bigip" {
   source                      = "github.com/f5devcentral/terraform-aws-bigip-module.git"
   count                       = var.instance_count
   prefix                      = format("%s-3nic", var.prefix)
@@ -188,7 +188,6 @@ module bigip {
   external_subnet_ids         = [{ "subnet_id" = aws_subnet.external-public.id, "public_ip" = true, "private_ip_primary" = "", "private_ip_secondary" = "" }]
   internal_subnet_ids         = [{ "subnet_id" = aws_subnet.internal.id, "public_ip" = false, "private_ip_primary" = "" }]
   f5_ami_search_name          = var.f5_ami_search_name
-  //depends_on                  = [aws_secretsmanager_secret.bigip]
 }
 
 resource "null_resource" "clusterDO" {
