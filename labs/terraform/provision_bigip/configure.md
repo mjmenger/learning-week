@@ -74,5 +74,20 @@ Now we can post the AS3 declaration to the BIG-IP:
 Now that the BIG-IP is configured with your demo application we will leverage InSpec to validate that the application is working correctly:
 ```bash
 export demo_eip=`aws ec2 describe-addresses | jq '.Addresses[] | select(.AllocationId | contains($allocation_id)) | .PublicIp' --arg allocation_id "$allocation_id -r`
-inspec exec test/demo-app --input=demo_app=$demo_eip
+
+inspec exec tests/demo-app --input=demo_app=$demo_eip
+```
+
+You should see an InSpec test summary that shows the test was successful:
+```bash
+Profile: InSpec Profile (demo-app)
+Version: 0.1.0
+Target:  local://
+
+  ✔  demo app: HTTP GET on http://44.234.225.16
+     ✔  HTTP GET on http://44.234.225.16 status is expected to cmp == 200
+
+
+Profile Summary: 1 successful control, 0 control failures, 0 controls skipped
+Test Summary: 1 successful, 0 failures, 0 skipped
 ```
