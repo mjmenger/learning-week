@@ -38,7 +38,7 @@ Open a base terminal in VS Code:
 2. Click Terminal
 3. Click New Terminal
 
-Note: when pasting the commands into the web-based VS Code you may be prompted to allow the web app access to your clipboard.
+Note: When pasting the commands into the web-based VS Code, you may be prompted to allow the web app access to your clipboard.
 
 ## Install AWS CLI
 Run the following commands in your VS Code terminal:
