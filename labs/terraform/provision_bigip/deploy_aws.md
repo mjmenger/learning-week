@@ -93,79 +93,47 @@ export as3_version=3.23.0
 
 Now run our test:
 ```bash
-inspec exec https://github.com/F5SolutionsEngineering/big-ip-atc-ready.git --input=bigip_address=$bigip_address bigip_port=$bigip_port user=$user password=$password do_version=$do_version as3_version=$as3_version ts_version=$ts_version
+inspec exec tests/big-ip --input=bigip_address=$bigip_address bigip_port=$bigip_port user=$user password=$password do_version=$do_version as3_version=$as3_version
 ```
 
-The InSpec exec commands tests:
+The InSpec profile tests:
 - the BIG-IP is reachabe
 - DO is installed
 - DO is running the requested version
 - AS3 is installed
 - AS3 is running the requested version
-- TS is installed
-- TS is running the requested version
-- FAST is installed
-- FAST is running the requested version
 - BIG-IP is licensed
 
-In the Inspec output you should notice that 10 tests were successful and 4 test failed.  This is because the Telemetry Streaming and FAST extensions are not currently installed on the BIG-IP.  We will take care of that in our next step. 
+In the Inspec output you should notice that 8 tests were successful.  
 ```bash
+Profile: InSpec Profile (big-ip)
+Version: 0.1.0
+Target:  local://
+
+     No tests executed.
+
 Profile: BIG-IP Automation Toolchain readiness (bigip-ready)
 Version: 0.1.0
 Target:  local://
 
   ✔  bigip-connectivity: BIG-IP is reachable
-     ✔  Host 44.241.96.34 port 443 proto tcp is expected to be reachable
+     ✔  Host 35.155.23.81 port 443 proto tcp is expected to be reachable
   ✔  bigip-declarative-onboarding: BIG-IP has Declarative Onboarding
-     ✔  HTTP GET on https://44.241.96.34:443/mgmt/shared/declarative-onboarding/info status is expected to cmp == 200
-     ✔  HTTP GET on https://44.241.96.34:443/mgmt/shared/declarative-onboarding/info headers.Content-Type is expected to match "application/json"
+     ✔  HTTP GET on https://35.155.23.81:443/mgmt/shared/declarative-onboarding/info status is expected to cmp == 200
+     ✔  HTTP GET on https://35.155.23.81:443/mgmt/shared/declarative-onboarding/info headers.Content-Type is expected to match "application/json"
   ✔  bigip-declarative-onboarding-version: BIG-IP has specified version of Declarative Onboarding
      ✔  JSON content [0, "version"] is expected to eq "1.16.0"
   ✔  bigip-application-services: BIG-IP has Application Services
-     ✔  HTTP GET on https://44.241.96.34:443/mgmt/shared/appsvcs/info status is expected to cmp == 200
-     ✔  HTTP GET on https://44.241.96.34:443/mgmt/shared/appsvcs/info headers.Content-Type is expected to match "application/json"
+     ✔  HTTP GET on https://35.155.23.81:443/mgmt/shared/appsvcs/info status is expected to cmp == 200
+     ✔  HTTP GET on https://35.155.23.81:443/mgmt/shared/appsvcs/info headers.Content-Type is expected to match "application/json"
   ✔  bigip-application-services-version: BIG-IP has specified version of Application Services
      ✔  JSON content version is expected to eq "3.23.0"
-  ×  bigip-telemetry-streaming: BIG-IP has Telemetry Streaming (1 failed)
-     ×  HTTP GET on https://44.241.96.34:443/mgmt/shared/telemetry/info status is expected to cmp == 200
-     
-     expected: 200
-          got: 404
-     
-     (compared using `cmp` matcher)
-
-     ✔  HTTP GET on https://44.241.96.34:443/mgmt/shared/telemetry/info headers.Content-Type is expected to match "application/json"
-  ×  bigip-telemetry-streaming-version: BIG-IP has specified version of Telemetry Streaming
-     ×  JSON content version is expected to eq #<Inspec::Input::NO_VALUE_SET:0x00000000046639c0 @name="ts_version">
-     
-     expected: #<Inspec::Input::NO_VALUE_SET:0x00000000046639c0 @name="ts_version">
-          got: nil
-     
-     (compared using ==)
-
-  ×  bigip-fast: BIG-IP has F5 Application Service Templates (1 failed)
-     ×  HTTP GET on https://44.241.96.34:443/mgmt/shared/fast/info status is expected to cmp == 200
-     
-     expected: 200
-          got: 404
-     
-     (compared using `cmp` matcher)
-
-     ✔  HTTP GET on https://44.241.96.34:443/mgmt/shared/fast/info headers.Content-Type is expected to match "application/json"
-  ×  bigip-fast-version: BIG-IP has specified version of F5 Application Service Templates
-     ×  JSON content version is expected to eq #<Inspec::Input::NO_VALUE_SET:0x00000000046624a8 @name="fast_version">
-     
-     expected: #<Inspec::Input::NO_VALUE_SET:0x00000000046624a8 @name="fast_version">
-          got: nil
-     
-     (compared using ==)
-
   ✔  bigip-licensed: BIG-IP has an active license
-     ✔  HTTP GET on https://44.241.96.34:443/mgmt/tm/sys/license body is expected to match /registrationKey/
+     ✔  HTTP GET on https://35.155.23.81:443/mgmt/tm/sys/license body is expected to match /registrationKey/
 
 
-Profile Summary: 6 successful controls, 4 control failures, 0 controls skipped
-Test Summary: 10 successful, 4 failures, 0 skipped
+Profile Summary: 6 successful controls, 0 control failures, 0 controls skipped
+Test Summary: 8 successful, 0 failures, 0 skipped
 ```
 
 In the next section we will configure the BIG-IP
