@@ -35,5 +35,9 @@ terraform.rc
 
 # Ignore Terraform lock
 .terraform.lock.hcl
+
 # Ignore created DO declarations
 DO*.json
+
+# Ignore EC2 key
+*.pem
