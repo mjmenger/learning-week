@@ -1,16 +1,7 @@
 # Deploy BIG-IP in AWS
-This section will walk you through deploying a 3-nic BIG-IP VE appliances in AWS leveraging the [BIG-IP Terraform Provisioner for AWS](https://github.com/f5devcentral/terraform-aws-bigip-module). 
+This section will walk you through deploying a 3-nic BIG-IP VE appliance in AWS leveraging the [BIG-IP Terraform Provisioner for AWS](https://github.com/f5devcentral/terraform-aws-bigip-module). 
 
 The code in this example will deploy a new VPC, subnets and a 3-nic BIG-IP.  The code is a modified version of the BIG-IP Terraform Provision for AWS [3-nic example](https://github.com/f5devcentral/terraform-aws-bigip-module/tree/master/examples/bigip_aws_3nic_deploy). 
-
-## Terraform Module Overview
-The BIG-IP Terraform Provisioner for AWS was created to help customers easily deploy a BIG-IP in AWS.  It drastically reduces the steps required to deploy a BIG-IP based upon best practices for AWS. The module is currently accessible via the F5DevCentral GitHub organization.  However, in the near future the module will be transfered to the F5Networks GitHub organization where it will recieve full F5 Support as well as be published in the [Terraform Registry](https://registry.terraform.io/). 
-
-### Advantages
-- The module is very versital as it supports any combination of network interfaces (n-nic) to match the customer's requirements 
-- The module installs specified versions of AS3 and DO
-- The module creates a DO declaration to help onboard the deployed BIG-IP
-- Can set the BIG-IP password from a secrets manager 
 
 ## Accept Marketplace Subscription
 To deploy the BIG-IP AWS Machine Image (AMI) we need to accept the marketplace subscription.  
@@ -60,12 +51,6 @@ Once the *terraform apply* command completes, it will output information related
 | vpc_id | ID for the VPC created in this demo |
 
 You can now use this information to onboard and configure the BIG-IP.
-
-## Examine What Was Created
-For this lab we leveraged the [BIG-IP Terraform Provisioner for AWS](https://github.com/f5devcentral/terraform-aws-bigip-module) to: 
-- Create an [AWS Secrets Manager](https://us-west-2.console.aws.amazon.com/secretsmanager/home?region=us-west-2#/listSecrets) secret to store a randomly generated password for the BIG-IP
-- deploy a 3-nic BIG-IP
-- Declarative Onboarding declaration to onboard the new BIG-IP
 
 ## Test the deployment
 To test our deployment we will leverage the [InSpec](inspec.io) tool by [Chef](https://www.chef.io/). 
@@ -135,6 +120,12 @@ Target:  local://
 Profile Summary: 6 successful controls, 0 control failures, 0 controls skipped
 Test Summary: 8 successful, 0 failures, 0 skipped
 ```
+
+## Examine What Was Created
+For this lab we leveraged the [BIG-IP Terraform Provisioner for AWS](https://github.com/f5devcentral/terraform-aws-bigip-module) to: 
+- Create an [AWS Secrets Manager](https://us-west-2.console.aws.amazon.com/secretsmanager/home?region=us-west-2#/listSecrets) secret to store a randomly generated password for the BIG-IP
+- deploy a 3-nic BIG-IP
+- Declarative Onboarding declaration to onboard the new BIG-IP
 
 In the next section we will configure the BIG-IP
 
