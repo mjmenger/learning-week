@@ -59,7 +59,7 @@ export vip_eni=`aws ec2 describe-instances | jq '.Reservations[0].Instances[0].N
 export allocation_id=`aws ec2 describe-addresses | jq '.Addresses[] | select(.NetworkInterfaceId | contains($vip_eni)) | .AllocationId' --arg vip_eni "$vip_eni" -r`
 aws ec2 associate-address --allocation-id $allocation_id --network-interface-id $vip_eni --private-ip-address $vip_private_address
 ```
-Now we can prepare the AS3 declaration by updated the AS3 VirtualAddresses to match the VIP private IP address determined in the previous step:
+Now we can prepare the AS3 declaration by updating the AS3 VirtualAddresses to match the VIP private IP address determined in the previous step:
 ```bash
 sed -i "s/{{VIP_ADDRESS}}/$vip_private_address/g" demo.as3.json
 ```
@@ -71,9 +71,9 @@ Now we can post the AS3 declaration to the BIG-IP:
 3. Right-click the text and click *Post as AS3 Declaration*
 
 ## Test Application
-Now that the BIG-IP is configured with your demo application we will leverage InSpec to validate that the application is working correctly:
+Now that the BIG-IP is configured with your demo application, we will leverage InSpec to validate that the application is working correctly:
 ```bash
-export demo_eip=`aws ec2 describe-addresses | jq '.Addresses[] | select(.AllocationId | contains($allocation_id)) | .PublicIp' --arg allocation_id "$allocation_id -r`
+export demo_eip=`aws ec2 describe-addresses | jq '.Addresses[] | select(.AllocationId | contains($allocation_id)) | .PublicIp' --arg allocation_id "$allocation_id" -r`
 
 inspec exec tests/demo-app --input=demo_app=$demo_eip
 ```
